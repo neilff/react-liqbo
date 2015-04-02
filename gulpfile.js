@@ -13,17 +13,7 @@ gulp.task('build-dev', ['webpack:build-dev'], function() {
 gulp.task('build', ['webpack:build']);
 
 gulp.task('webpack:build', function(callback) {
-  var config = Object.create(webpackConfig);
-
-  config.plugins = config.plugins.concat(
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
-  );
+  var config = Object.create(webpackConfig(false));
 
   gulp.src('./client/index.html')
     .pipe(gulp.dest('./build'));
@@ -41,10 +31,7 @@ gulp.task('webpack:build', function(callback) {
   });
 });
 
-var devConfig = Object.create(webpackConfig);
-devConfig.devtool = 'sourcemap';
-devConfig.debug = true;
-
+var devConfig = Object.create(webpackConfig(true));
 var devCompiler = webpack(devConfig);
 
 gulp.task('webpack:build-dev', function(callback) {
@@ -62,21 +49,29 @@ gulp.task('webpack:build-dev', function(callback) {
 });
 
 gulp.task('webpack-dev-server', function(callback) {
-  var config = Object.create(webpackConfig);
-  config.devtool = 'eval';
-  config.debug = true;
+  var config = Object.create(webpackConfig(true));
 
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(config), {
     publicPath: '/' + config.output.publicPath,
+    contentBase: 'client/',
+    hot: true,
+    quiet: false,
+    noInfo: true,
     stats: {
-      colors: true
+      assets: false,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: false,
+      chunks: false,
+      chunkModules: false
     }
-  }).listen(3000, 'localhost', function(err) {
+  }).listen(8888, 'localhost', function(err) {
     if(err) {
       throw new gutil.PluginError('webpack-dev-server', err);
     }
 
-    gutil.log('[webpack-dev-server]', 'http://localhost:3000/webpack-dev-server/index.html');
+    gutil.log('[webpack-dev-server]', 'http://localhost:8888/webpack-dev-server/index.html');
   });
 });

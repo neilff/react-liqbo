@@ -1,30 +1,70 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-module.exports = {
-  devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './client/scripts/index'
-  ],
-  output: {
-    path: path.join(__dirname, 'build/scripts'),
-    filename: 'bundle.js',
-    publicPath: 'client/scripts/'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loaders: ['react-hot', 'babel'],
-      include: path.join(__dirname, 'client')
-    }]
-  }
+module.exports = function(isDevelopment) {
+  var config = {
+    cache: isDevelopment,
+    debug: isDevelopment,
+    devtool: isDevelopment ? 'eval-source-map' : '',
+    entry: isDevelopment ? [
+      'webpack-dev-server/client?http://localhost:8888',
+      'webpack/hot/only-dev-server',
+      './client/scripts/index'
+    ] : ['./client/scripts/index'],
+    output: {
+      path: path.join(__dirname, 'build/scripts'),
+      filename: 'bundle.js',
+      publicPath: 'scripts/'
+    },
+    plugins: (function() {
+      var plugins = [
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+            IS_BROWSER: true
+          }
+        })
+      ]
+      if (isDevelopment)
+        plugins.push(
+          new webpack.HotModuleReplacementPlugin(),
+          new webpack.NoErrorsPlugin()
+        )
+      else
+        plugins.push(
+          new ExtractTextPlugin('app.css', {
+            allChunks: true
+          }),
+          new webpack.optimize.DedupePlugin(),
+          new webpack.optimize.OccurenceOrderPlugin(),
+          new webpack.optimize.UglifyJsPlugin({
+            compress: {
+              warnings: false
+            }
+          })
+        )
+      return plugins
+    })(),
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.json']
+    },
+    module: {
+      loaders: [{
+        test: /\.jsx?$/,
+        loaders: isDevelopment ?
+          ['react-hot', 'babel'] :
+          ['babel'],
+        include: path.join(__dirname, 'client')
+      }, {
+        loader: 'url-loader?limit=100000',
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/
+      }, {
+        test: /\.scss$/,
+        loader: 'style!css!sass'
+      }]
+    }
+  };
+
+  return config;
 };

@@ -8,8 +8,3 @@ const app = document.getElementById('root');
 Router.run(routes, (Handler) => {
   React.render(<Handler {...i18nCursor().toJS()} />, app)
 });
-
-if (process.env.NODE_ENV === 'production') {
-  // Dev only code.
-  // TODO: Report app errors.
-}

@@ -7,7 +7,7 @@ var webpackConfig = require('./webpack.config.js');
 gulp.task('default', ['webpack-dev-server']);
 
 gulp.task('build-dev', ['webpack:build-dev'], function() {
-  gulp.watch(['client/**/*'], ['webpack:build-dev']);
+  gulp.watch(['src/**/*'], ['webpack:build-dev']);
 });
 
 gulp.task('build', ['webpack:build']);
@@ -15,7 +15,7 @@ gulp.task('build', ['webpack:build']);
 gulp.task('webpack:build', function(callback) {
   var config = Object.create(webpackConfig(false));
 
-  gulp.src('./client/index.html')
+  gulp.src('./src/index.html')
     .pipe(gulp.dest('./build'));
 
   webpack(config, function(err, stats) {
@@ -54,7 +54,7 @@ gulp.task('webpack-dev-server', function(callback) {
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(config), {
     publicPath: '/' + config.output.publicPath,
-    contentBase: 'client/',
+    contentBase: 'src/',
     hot: true,
     quiet: false,
     noInfo: true,

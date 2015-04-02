@@ -10,12 +10,12 @@ module.exports = function(isDevelopment) {
     entry: isDevelopment ? [
       'webpack-dev-server/client?http://localhost:8888',
       'webpack/hot/only-dev-server',
-      './client/scripts/index'
-    ] : ['./client/scripts/index'],
+      './src/client/main.js'
+    ] : ['./src/client/main.js'],
     output: {
       path: path.join(__dirname, 'build/scripts'),
       filename: 'bundle.js',
-      publicPath: 'scripts/'
+      publicPath: 'client/'
     },
     plugins: (function() {
       var plugins = [
@@ -50,19 +50,11 @@ module.exports = function(isDevelopment) {
       extensions: ['', '.js', '.jsx', '.json']
     },
     module: {
-      loaders: [{
-        test: /\.jsx?$/,
-        loaders: isDevelopment ?
-          ['react-hot', 'babel'] :
-          ['babel'],
-        include: path.join(__dirname, 'client')
-      }, {
-        loader: 'url-loader?limit=100000',
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/
-      }, {
-        test: /\.scss$/,
-        loader: 'style!css!sass'
-      }]
+      loaders: [
+        { test: /\.jsx?$/, loaders: isDevelopment ? ['react-hot', 'babel'] : ['babel'], include: path.join(__dirname, 'src') },
+        { loader: 'url-loader?limit=100000', test: /\.(png|woff|woff2|eot|ttf|svg)$/ },
+        { test: /\.scss$/, loader: 'style!css!sass' }
+      ]
     }
   };
 

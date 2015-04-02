@@ -1,0 +1,31 @@
+{
+  "name": "react-liqbo",
+  "version": "1.0.0",
+  "description": "Liqbo - Lcbo Finder written in React.js",
+  "scripts": {
+    "start": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neilff/react-liqbo.git"
+  },
+  "author": "Neil Fenton <neilff@gmail.com> (http://github.com/neilff)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neilff/react-liqbo.git/issues"
+  },
+  "homepage": "https://github.com/neilff/react-liqbo.git",
+  "devDependencies": {
+    "babel-core": "^4.7.4",
+    "babel-loader": "^4.1.0",
+    "gulp": "^3.8.11",
+    "gulp-util": "^3.0.4",
+    "gutil": "^1.6.4",
+    "react-hot-loader": "^1.2.2",
+    "webpack": "^1.7.2",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "dependencies": {
+    "react": "^0.13.0"
+  }
+}

@@ -2,14 +2,20 @@ import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {Link} from 'react-router';
 import SearchInput from './search';
+import Map from './map';
 import LocatorList from './locator-list';
 import LoadingPanel from './loading-panel';
-// import Map from '../map/map';
 import {getUIState} from '../../ui/store';
+import {Gmaps, Marker} from 'react-gmaps';
 import {getNewQuery, getLocatorQuery} from '../../locator/store';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../../assets/css/core/layout.scss');
+
+var coords = {
+  lat: 43.7182713,
+  lng: -79.3777061
+};
 
 export default React.createClass({
   render() {
@@ -30,11 +36,23 @@ export default React.createClass({
               <LocatorList stores={ locatorQuery } />
             </div>
             <div className="layout__content--right map">
-              <h4>Map Content</h4>
+              <Map stores={ locatorQuery } />
             </div>
           </section>
         </main>
       </DocumentTitle>
     );
+  },
+
+  onMapCreated(component) {
+    console.log('onMapCreated', component.getMap());
+
+    component.getMap().setOptions({
+      disableDefaultUI: true
+    });
+  },
+
+  onClick() {
+    console.log('onClick');
   }
 });

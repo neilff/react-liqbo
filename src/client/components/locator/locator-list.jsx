@@ -6,7 +6,6 @@ import {addons} from 'react/addons'
 require('../../../../assets/css/components/search-list.scss');
 
 export default React.createClass({
-  // Try add hundreds stores. Typing new store is still superfast.
   mixins: [addons.PureRenderMixin],
 
   propTypes: {
@@ -14,8 +13,6 @@ export default React.createClass({
   },
 
   render() {
-    console.log('Stores :: ', this.props.stores);
-
     return (
       <div className="search-list__container">
         <ul className="search-list__list">

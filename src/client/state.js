@@ -8,7 +8,7 @@ const initialState = {
     locales: initialLocale,
     messages: messages[initialLocale]
   },
-  query: { q: 'queen' },
+  query: { q: '' },
   locator: [],
   ui: {
     isQuerying: false

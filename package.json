@@ -19,7 +19,7 @@
     "url": "https://github.com/neilff/react-liqbo.git/issues"
   },
   "homepage": "https://github.com/neilff/react-liqbo.git",
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^4.7.4",
     "babel-loader": "^4.1.0",
     "gulp": "^3.8.11",
@@ -27,9 +27,7 @@
     "gutil": "^1.6.4",
     "react-hot-loader": "^1.2.2",
     "webpack": "^1.7.2",
-    "webpack-dev-server": "^1.7.0"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^1.7.0",
     "express": "~4.9.x",
     "extract-text-webpack-plugin": "^0.5.0",
     "file-loader": "^0.8.1",

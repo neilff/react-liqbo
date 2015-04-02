@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Liqbo - Lcbo Finder written in React.js",
   "scripts": {
-    "start": "gulp build"
+    "start": "node server.js",
+    "postinstall": "node node_modules/gulp/bin/gulp.js build"
   },
   "repository": {
     "type": "git",

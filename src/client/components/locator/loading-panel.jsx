@@ -1,12 +1,11 @@
 import React from 'react/addons';
 import Immutable from 'immutable';
 import {addons} from 'react/addons';
+import classNames from 'classnames';
 
 require('../../../../assets/css/components/loading-panel.scss');
 
-var image = require('file?!../../../../assets/img/loading.svg');
-
-console.log(image);
+var spinner = require('../../../../assets/img/loading.svg');
 
 export default React.createClass({
   mixins: [addons.PureRenderMixin],
@@ -18,16 +17,16 @@ export default React.createClass({
   render() {
     const status = this.props.status;
 
-    var cx = React.addons.classSet;
-
-    var classes = cx({
+    var classes = classNames({
       'loading-panel': true,
       'loading-panel--visible': status.get('isQuerying')
     });
 
     return (
       <div className={ classes }>
-        <img src={image} />
+        <div className="loading-panel__wrapper">
+          <img src={ spinner } />
+        </div>
       </div>
     );
   }

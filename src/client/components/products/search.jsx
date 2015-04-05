@@ -1,33 +1,32 @@
 import React from 'react';
-import immutable from 'immutable';
+import Immutable from 'immutable';
 import {IntlMixin} from 'react-intl';
 import {addons} from 'react/addons';
 import LoadingButton from '../ui/loading-button/loading-button';
-import {onLocatorQuerySubmit, onLocatorQueryChange} from '../../locator/actions';
+import {onProductsQuerySubmit, onProductsQueryChange} from '../../products/actions';
 
 export default React.createClass({
   mixins: [addons.PureRenderMixin, IntlMixin],
 
   propTypes: {
-    query: React.PropTypes.instanceOf(immutable.Map),
-    location: React.PropTypes.instanceOf(immutable.Map),
-    status: React.PropTypes.instanceOf(immutable.Map)
+    query: React.PropTypes.instanceOf(Immutable.Map),
+    status: React.PropTypes.instanceOf(Immutable.Map)
   },
 
   onSubmit(e) {
     e.preventDefault();
-    onLocatorQuerySubmit(this.props.query, this.props.location);
+    onProductsQuerySubmit(this.props.query, this.props.location);
   },
 
   onKeyDown(e) {
     if (e.key == 'Enter') {
-      onLocatorQuerySubmit(this.props.query, this.props.location);
+      onProductsQuerySubmit(this.props.query, this.props.location);
     }
   },
 
   onChange(e) {
     e.persist();
-    onLocatorQueryChange(e, this.props.location);
+    onProductsQueryChange(e, this.props.location);
   },
 
   render() {

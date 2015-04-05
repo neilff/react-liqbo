@@ -1,0 +1,23 @@
+@import '../core/variables';
+
+.geolocator {
+  margin: 0 0 0 16px;
+  border: 0;
+  padding: 0 16px;
+  font-size: 18px;
+  height: 40px;
+  border: 1px solid $black;
+  background-color: $blue;
+  border-radius: 0;
+  color: white;
+
+  &:focus,
+  &:hover {
+    color: white;
+    border: 1px solid $black;
+  }
+
+  &:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  }
+}

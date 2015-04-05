@@ -3,7 +3,8 @@ import React from 'react';
 import {IntlMixin} from 'react-intl';
 import {Link, RouteHandler} from 'react-router';
 import {state} from '../state';
-import Navigator from './navigator';
+import Sidebar from './sidebar';
+import {onGeoLocateRequest} from '../locator/actions';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/core/normalize.scss');
@@ -15,6 +16,8 @@ export default React.createClass({
 
   componentDidMount() {
     require('fastclick').attach(document.body);
+
+    onGeoLocateRequest();
 
     state.on('change', () => {
       // console.time('whole app rerender')
@@ -28,7 +31,7 @@ export default React.createClass({
     return (
       <DocumentTitle title="Liqbo">
         <div className="layout">
-          <Navigator />
+          <Sidebar />
           <RouteHandler />
         </div>
       </DocumentTitle>

@@ -1,17 +1,8 @@
 import * as actions from './actions';
 import Immutable from 'immutable';
-import {queryCursor, locatorCursor} from '../state';
+import {locatorQueryCursor, locatorCursor, mapFocusCursor, userLocationCursor} from '../state';
 import {register} from '../dispatcher';
-
-const LocatorItem = Immutable.Record({
-  id: '',
-  name: '',
-  address: '',
-  postal_code: '',
-  city: '',
-  latitude: '',
-  longitude: ''
-});
+import {LocatorItem, LocatorCoordinates, UserGeoLocation} from '../records';
 
 export const dispatchToken = register(({action, data}) => {
 
@@ -24,7 +15,7 @@ export const dispatchToken = register(({action, data}) => {
      */
     case actions.onLocatorQueryChange:
       const {name, value} = data;
-      queryCursor(query => query.set(name, value));
+      locatorQueryCursor(query => query.set(name, value));
       break;
 
     /**
@@ -32,7 +23,7 @@ export const dispatchToken = register(({action, data}) => {
      * map and register the items as new records.
      */
     case actions.onLocatorQuerySuccess:
-      return locatorCursor(locations => {
+      locatorCursor(locations => {
         return locations.withMutations(list => {
           list.clear();
 
@@ -42,13 +33,39 @@ export const dispatchToken = register(({action, data}) => {
         });
       });
       break;
+
+    case actions.onMapFocus:
+      mapFocusCursor(focus => {
+        return focus.withMutations(list => {
+          list.clear();
+
+          data.forEach(i => {
+            list.push(new LocatorCoordinates(i).toMap());
+          });
+        });
+      });
+      break;
+
+    case actions.onGeoLocationSuccess:
+      userLocationCursor(location => {
+        return new UserGeoLocation(data.coords).toMap();
+      });
+      break;
   };
 })
 
 export function getNewQuery() {
-  return queryCursor();
+  return locatorQueryCursor();
 }
 
 export function getLocatorQuery() {
   return locatorCursor();
+}
+
+export function getMapFocus() {
+  return mapFocusCursor();
+}
+
+export function getUserLocation() {
+  return userLocationCursor();
 }

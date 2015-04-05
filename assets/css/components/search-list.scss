@@ -4,6 +4,10 @@
   max-width: 100%;
   position: relative;
 
+  a {
+    color: black;
+  }
+
   &__input {
     color: black;
     flex: 0.75;
@@ -34,6 +38,7 @@
       border-left: 1px solid $black;
       background-color: $blue;
       border-radius: 0;
+      padding: 0;
       color: white;
 
       &:active {
@@ -57,30 +62,54 @@
     padding: 0;
     margin: 0;
 
+    // Note the nasty CSS trickery trying to hide the
+    // border when collapsed
     &--item {
       margin: 0;
       font-size: 18px;
-      border-bottom: 1px solid $black * 1.15;
       background-color: white;
-      transition: background-color 100ms;
+      transition: all 100ms;
 
-      &:hover {
-        cursor: pointer;
+      .media-object__expanded {
+        border-top: 1px solid white;
+        border-bottom: 1px solid $black * 1.15;
+        background-color: white;
+      }
+
+      &:hover,
+      &--expanded {
         background-color: $blue;
-        border-bottom: 1px solid $black;
 
-        .media-object__body {
+        .media-object__body,
+        .media-object__figure {
           color: white;
+        }
+
+        .media-object__expanded {
+          border-top: 1px solid $blue;
+        }
+
+        .media-object__expanded .media-object__body {
+          color: black;
         }
       }
 
-      .icon {
-        font-size: 32px;
-        line-height: 1;
+      .media-object__expanded--visible {
+        border-top: 1px solid $black * 1.15 !important;
       }
 
       .media-object__figure {
         align-items: top;
+      }
+
+      ul {
+        font-size: 1.5rem;
+        margin: 1.5rem;
+        list-style-type: none;
+
+        li {
+          margin: 0;
+        }
       }
     }
   }

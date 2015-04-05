@@ -1,0 +1,46 @@
+.loading-button {
+  position: relative;
+
+  img {
+    padding: 8px 0;
+    max-width: 20px;
+    max-height: 20px;
+  }
+
+  &__spinner {
+    position: absolute;
+    left: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+  }
+
+  &__content {
+    transition: 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+  }
+
+  &.is-loading {
+    cursor: default;
+
+    .loading-button__spinner {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .loading-button__content {
+      padding-left: 28px;
+    }
+  }
+
+  &.btn-lg {
+    svg {
+      max-width: 26px;
+      max-height: 26px;
+    }
+
+    .loading__button--spinner {
+      left: 30%;
+    }
+  }
+}
+

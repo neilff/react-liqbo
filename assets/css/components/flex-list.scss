@@ -1,0 +1,14 @@
+.flex-list {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  padding-bottom: 4px;
+
+  .one {
+    flex: 1;
+  }
+
+  .two {
+    flex: 2;
+  }
+}

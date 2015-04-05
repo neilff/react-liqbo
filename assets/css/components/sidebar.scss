@@ -1,7 +1,7 @@
 @import '../core/variables';
 @import './media-object';
 
-.navigator {
+.sidebar {
   background-color: $black / 1.15;
 
   a {
@@ -16,6 +16,7 @@
     color: white;
     padding: 8px;
     font-family: 'Lobster';
+    text-transform: none !important;
 
     h1 {
       font-size: 32px;

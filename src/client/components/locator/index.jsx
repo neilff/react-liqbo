@@ -7,7 +7,9 @@ import LocatorList from './locator-list';
 import LoadingPanel from './loading-panel';
 import {getUIState} from '../../ui/store';
 import {Gmaps, Marker} from 'react-gmaps';
-import {getNewQuery, getLocatorQuery} from '../../locator/store';
+import GeoLocate from '../geolocator/geolocator';
+import * as storeCursors from '../../locator/store';
+import * as favouriteCursors from '../../favourites/store';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../../assets/css/core/layout.scss');
@@ -19,8 +21,13 @@ var coords = {
 
 export default React.createClass({
   render() {
-    const newQuery = getNewQuery();
-    const locatorQuery = getLocatorQuery();
+    const newQuery = storeCursors.getNewQuery();
+    const locatorQuery = storeCursors.getLocatorQuery();
+    const mapFocus = storeCursors.getMapFocus();
+    const currentLocation = storeCursors.getUserLocation();
+
+    const storeFavourites = favouriteCursors.getStoreFavourites();
+
     const uiState = getUIState();
 
     return (
@@ -28,31 +35,20 @@ export default React.createClass({
         <main className="layout__body">
           <header className="layout__header">
             <h2>Stores</h2>
-            <SearchInput query={ newQuery } />
+            <SearchInput query={ newQuery } location={ currentLocation } status={ uiState } />
+            <GeoLocate status={ uiState } />
           </header>
           <section className="layout__content">
             <div className="layout__content--left search-list">
               <LoadingPanel status={ uiState } />
-              <LocatorList stores={ locatorQuery } />
+              <LocatorList stores={ locatorQuery } favourites={ storeFavourites } />
             </div>
             <div className="layout__content--right map">
-              <Map stores={ locatorQuery } />
+              <Map stores={ locatorQuery } focus={ mapFocus } user={ currentLocation } />
             </div>
           </section>
         </main>
       </DocumentTitle>
     );
-  },
-
-  onMapCreated(component) {
-    console.log('onMapCreated', component.getMap());
-
-    component.getMap().setOptions({
-      disableDefaultUI: true
-    });
-  },
-
-  onClick() {
-    console.log('onClick');
   }
 });

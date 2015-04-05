@@ -1,22 +1,60 @@
-import setToString from '../../lib/settostring'
-import {dispatch} from '../dispatcher'
-import {getStores} from '../api/stores-api'
+import setToString from '../../lib/settostring';
+import {dispatch} from '../dispatcher';
+import {getStores} from '../api/stores-api';
+import {requestGeoLocation} from '../utils/geolocation';
 
 export function onLocatorQueryChange({target: {name, value}}) {
   dispatch(onLocatorQueryChange, {name, value});
-  getStores({q: encodeURI(value).replace(/%20/g,'+')});
+  getStores({
+    q: encodeURI(value).replace(/%20/g,'+')
+  });
 }
 
-export function onLocatorQuerySubmit(query) {
+export function onLocatorQuerySubmit(query, location) {
   dispatch(onLocatorQuerySubmit, query);
-  getStores({q: encodeURI(query.get('q')).replace(/%20/g,'+')});
+  getStores({
+    q: encodeURI(query.get('q')).replace(/%20/g,'+')
+  });
 }
 
 export function onLocatorQuerySuccess(result) {
   dispatch(onLocatorQuerySuccess, result);
 }
 
+export function onLocatorQueryFail(error) {
+  console.error(error);
+  dispatch(onLocatorQueryFail, error);
+}
+
+export function onMapFocus(stores) {
+  dispatch(onMapFocus, stores);
+}
+
+export function onGeoLocateRequest() {
+  dispatch(onGeoLocateRequest);
+  requestGeoLocation();
+}
+
+export function onGeoLocationSuccess(location) {
+  dispatch(onGeoLocationSuccess, location);
+  getStores({
+    lat: location.coords.latitude,
+    lon: location.coords.longitude
+  });
+}
+
+export function onGeoLocationFail(error) {
+  dispatch(onGeoLocationFail, error);
+}
+
 // Override actions toString for logging.
 setToString('locator', {
-  onLocatorQueryChange, onLocatorQuerySubmit, onLocatorQuerySuccess
+  onLocatorQueryChange,
+  onLocatorQuerySubmit,
+  onLocatorQuerySuccess,
+  onLocatorQueryFail,
+  onMapFocus,
+  onGeoLocateRequest,
+  onGeoLocationSuccess,
+  onGeoLocationFail
 });

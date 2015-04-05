@@ -9,7 +9,7 @@ export const dispatchToken = register(({action, data}) => {
   switch (action) {
 
     /**
-     * When a store query occurs
+     * Store Query Events
      */
     case locatorActions.onLocatorQueryChange:
       uiCursor(state => state.set('isQuerying', true));
@@ -19,10 +19,18 @@ export const dispatchToken = register(({action, data}) => {
       uiCursor(state => state.set('isQuerying', true));
       break;
 
-    /**
-     * When a store query returns successfully
-     */
     case locatorActions.onLocatorQuerySuccess:
+      uiCursor(state => state.set('isQuerying', false));
+      break;
+
+    /**
+     * Geolocation Query Events
+     */
+    case locatorActions.onGeoLocateRequest:
+      uiCursor(state => state.set('isQuerying', true));
+      break;
+
+    case locatorActions.onGeoLocationFail:
       uiCursor(state => state.set('isQuerying', false));
       break;
   };

@@ -1,26 +1,26 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-require('../../../../assets/css/components/navigator.scss');
+require('../../../../assets/css/components/sidebar.scss');
 
 export default React.createClass({
 
   render() {
     return (
-      <nav className="layout__navigation navigator">
-        <div className="navigator__logo">
+      <nav className="layout__navigation sidebar">
+        <Link to="home" className="sidebar__logo">
           <h1>Liqbo</h1>
-        </div>
-        <div className="navigator__links">
-          <Link to="home" className="navigator__links--item">
+        </Link>
+        <div className="sidebar__links">
+          <Link to="products" className="sidebar__links--item">
             <div>
               <i className="icon ion-wineglass" />
             </div>
             <div>
-              <span className="icon-label">Drinks</span>
+              <span className="icon-label">Products</span>
             </div>
           </Link>
-          <Link to="locator" className="navigator__links--item">
+          <Link to="locator" className="sidebar__links--item">
             <div>
               <i className="icon ion-android-cart" />
             </div>

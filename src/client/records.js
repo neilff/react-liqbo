@@ -47,6 +47,7 @@ export const ProductItem = Immutable.Record({
   alcohol_content: '',
   price_per_liter_of_alcohol_in_cents: '',
   price_per_liter_in_cents: '',
+  price: '',
   inventory_count: '',
   sugar_content: '',
   producer_name: '',

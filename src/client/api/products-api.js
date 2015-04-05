@@ -4,11 +4,21 @@ import debounce from 'debounce';
 import {get} from '../utils/server';
 import {onProductsQuerySuccess, onProductsQueryFail} from '../products/actions';
 
-function buildProductVM(products) {
-  console.log('buildProductVM :: ', products);
+/**
+ * Converts product price to a human readable format
+ *
+ * @param {object} product LCBO API Product Object
+ * @return {object} Modified API object
+ */
+function _convertProductPrice(product) {
+  product.price = (product.price_in_cents / 100).toFixed(2);
 
-  return products;
+  return product;
 }
+
+var buildProductVM = R.pipeP(
+  R.map(_convertProductPrice)
+);
 
 /**
  * GET lcboapi.com/products

@@ -16,6 +16,8 @@ export default React.createClass({
   render() {
     const product = this.props.product;
     const productImg = product.get('image_thumb_url');
+    const productSale = product.get('has_limited_time_offer');
+    const productClearance = product.get('has_clearance_sale');
 
     return (
       <div className="product-card">
@@ -30,6 +32,11 @@ export default React.createClass({
             <div className="product-card__description">
               <div>{ product.get('package') }</div>
               <div>{ product.get('origin') }</div>
+              <div><strong>${ product.get('price') }</strong></div>
+              <div>
+                { productSale ? <span className="bubble blue">On Sale</span> : '' }
+                { productClearance ? <span className="bubble red">On Clearance</span> : ''  }
+              </div>
             </div>
           </div>
         </div>

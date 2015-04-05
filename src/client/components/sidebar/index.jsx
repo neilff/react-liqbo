@@ -28,6 +28,22 @@ export default React.createClass({
               <span className="icon-label">Stores</span>
             </div>
           </Link>
+          <Link to="favourites" className="sidebar__links--item">
+            <div>
+              <i className="icon ion-bookmark" />
+            </div>
+            <div>
+              <span className="icon-label">Favourites</span>
+            </div>
+          </Link>
+          <Link to="about" className="sidebar__links--item">
+            <div>
+              <i className="icon ion-ios-help" />
+            </div>
+            <div>
+              <span className="icon-label">About</span>
+            </div>
+          </Link>
         </div>
       </nav>
     );

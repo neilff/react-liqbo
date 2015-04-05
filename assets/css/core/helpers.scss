@@ -1,0 +1,33 @@
+@import './variables';
+
+strong {
+  text-transform: uppercase;
+  letter-spacing: 1.15;
+  font-weight: 600;
+  font-size: 1.35rem;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.bubble {
+  background-color: $black;
+  color: white;
+  padding: 5px;
+  line-height: 45px;
+
+  &.blue {
+    background-color: $blue;
+    color: white;
+  }
+
+  &.red {
+    background-color: red;
+    color: white;
+  }
+}

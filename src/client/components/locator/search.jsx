@@ -16,12 +16,12 @@ export default React.createClass({
 
   onSubmit(e) {
     e.preventDefault();
-    onLocatorQuerySubmit(this.props.query, this.props.location);
+    onLocatorQuerySubmit(this.props.query.get('q'), this.props.location);
   },
 
   onKeyDown(e) {
     if (e.key == 'Enter') {
-      onLocatorQuerySubmit(this.props.query, this.props.location);
+      onLocatorQuerySubmit(this.props.query.get('q'), this.props.location);
     }
   },
 

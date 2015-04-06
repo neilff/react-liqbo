@@ -13,6 +13,7 @@ const initialState = {
   locatorItems: [],
   productQuery: { q: '' },
   productItems: [],
+  productDetails: {},
   mapFocus: [{
     id: null,
     latitude: 43.7182713,
@@ -35,6 +36,7 @@ export const locatorQueryCursor = state.cursor(['locatorQuery']);
 export const locatorCursor = state.cursor(['locatorItems']);
 export const productQueryCursor = state.cursor(['productQuery']);
 export const productCursor = state.cursor(['productItems']);
+export const productDetailCursor = state.cursor(['productDetails']);
 export const uiCursor = state.cursor(['ui']);
 export const mapFocusCursor = state.cursor(['mapFocus']);
 export const userLocationCursor = state.cursor(['userLocation']);

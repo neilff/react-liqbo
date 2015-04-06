@@ -7,7 +7,7 @@ export default React.createClass({
 
   render() {
     return (
-      <nav className="layout__navigation sidebar">
+      <nav className="layout__sidebar sidebar">
         <Link to="home" className="sidebar__logo">
           <h1>Liqbo</h1>
         </Link>

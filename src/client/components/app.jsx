@@ -5,6 +5,7 @@ import {Link, RouteHandler} from 'react-router';
 import {state} from '../state';
 import Sidebar from './sidebar';
 import {onGeoLocateRequest} from '../locator/actions';
+import {onProductsQuerySubmit} from '../products/actions';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/core/normalize.scss');
@@ -17,6 +18,7 @@ export default React.createClass({
   componentDidMount() {
     require('fastclick').attach(document.body);
 
+    onProductsQuerySubmit();
     onGeoLocateRequest();
 
     state.on('change', () => {

@@ -1,0 +1,13 @@
+.product-detail {
+  img {
+    max-width: 100%;
+  }
+
+  &__description {
+    padding-top: 50px;
+  }
+
+  &__price {
+    font-size: 3rem;
+  }
+}

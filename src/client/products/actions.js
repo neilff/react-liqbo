@@ -1,6 +1,6 @@
 import setToString from '../../lib/settostring';
 import {dispatch} from '../dispatcher';
-import {getProducts} from '../api/products-api';
+import {getProducts, getProduct} from '../api/products-api';
 
 export function onProductsQueryChange({target: {name, value}}) {
   dispatch(onProductsQueryChange, {name, value});
@@ -9,10 +9,15 @@ export function onProductsQueryChange({target: {name, value}}) {
   });
 }
 
+/**
+ * Products Query Actions
+ */
 export function onProductsQuerySubmit(query) {
+  query = query || '';
+
   dispatch(onProductsQuerySubmit, query);
   getProducts({
-    q: encodeURI(query.get('q')).replace(/%20/g,'+')
+    q: encodeURI(query).replace(/%20/g,'+')
   });
 }
 
@@ -25,10 +30,29 @@ export function onProductsQueryFail(error) {
   dispatch(onProductsQueryFail, error);
 }
 
+/**
+ * Product Detail Query Actions
+ */
+export function onProductDetailRequest(id) {
+  dispatch(onProductDetailRequest);
+  getProduct(id);
+}
+
+export function onProductDetailQuerySuccess(result) {
+  dispatch(onProductDetailQuerySuccess, result);
+}
+
+export function onProductDetailQueryFail(result) {
+  dispatch(onProductDetailQueryFail, result)
+}
+
 // Override actions toString for logging.
 setToString('products', {
   onProductsQueryChange,
   onProductsQuerySubmit,
   onProductsQuerySuccess,
-  onProductsQueryFail
+  onProductsQueryFail,
+  onProductDetailRequest,
+  onProductDetailQuerySuccess,
+  onProductDetailQueryFail
 });

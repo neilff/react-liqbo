@@ -34,7 +34,7 @@ export default React.createClass({
       <DocumentTitle title="Liqbo - Store Locator">
         <main className="layout__body">
           <header className="layout__header">
-            <h2>Stores</h2>
+            <h3>Stores</h3>
             <SearchInput query={ newQuery } location={ currentLocation } status={ uiState } />
             <GeoLocate status={ uiState } />
           </header>

@@ -13,7 +13,7 @@ export default React.createClass({
       <DocumentTitle title="Liqbo - Product Finder">
         <main className="layout__body">
           <header className="layout__header">
-            <h2>About</h2>
+            <h3>About</h3>
           </header>
           <section className="layout__content">
             <h3>About Us</h3>

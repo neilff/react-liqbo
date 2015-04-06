@@ -1,6 +1,7 @@
 import React from 'react';
 import Immutable from 'immutable';
 import {addons} from 'react/addons';
+import {Link} from 'react-router';
 
 require('../../../../assets/css/components/product-card.scss');
 
@@ -20,7 +21,7 @@ export default React.createClass({
     const productClearance = product.get('has_clearance_sale');
 
     return (
-      <div className="product-card">
+      <Link to="product" params={ {productId: product.get('id')} } className="product-card">
         <div className="media-object product-card--inner">
           <div className="media-object__figure product-card__image">
             <img src={ productImg ? productImg : notAvailableImg  } />
@@ -40,7 +41,7 @@ export default React.createClass({
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 });

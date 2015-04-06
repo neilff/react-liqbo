@@ -15,12 +15,12 @@ export default React.createClass({
 
   onSubmit(e) {
     e.preventDefault();
-    onProductsQuerySubmit(this.props.query, this.props.location);
+    onProductsQuerySubmit(this.props.query.get('q'), this.props.location);
   },
 
   onKeyDown(e) {
     if (e.key == 'Enter') {
-      onProductsQuerySubmit(this.props.query, this.props.location);
+      onProductsQuerySubmit(this.props.query.get('q'), this.props.location);
     }
   },
 
@@ -42,7 +42,7 @@ export default React.createClass({
           name="q"
           type="text"
           onChange={ this.onChange }
-          placeholder={ this.getIntlMessage('locator.searchText') }
+          placeholder={ this.getIntlMessage('products.searchText') }
           value={this.props.query.get('q')}
         />
         <LoadingButton isLoading={ isLoading }>

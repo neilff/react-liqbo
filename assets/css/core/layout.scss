@@ -1,37 +1,47 @@
 @import './variables';
+@import './flex-grid';
 
 .layout {
   display: flex;
-  height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   flex-direction: row;
 
   &__header {
     display: flex;
     flex: 1;
+    height: 85px;
+    box-sizing: border-box;
     align-items: center;
     padding: 16px;
     border-bottom: 1px solid $black;
 
-    h2 {
+    h3 {
       margin: 0;
       padding: 0;
       flex: 1;
+    }
+
+    a {
+      color: $black;
     }
   }
 
   &__body {
     flex: 1;
+    margin-left: 100px;
+
+    &--padded {
+      padding: 16px;
+    }
   }
 
   &__sidebar {
     box-sizing: border-box;
     flex: 1;
-    position: relative;
+    position: fixed;
+    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    border-right: 1px solid $black;
   }
 
   &__content {

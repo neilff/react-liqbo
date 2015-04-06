@@ -21,7 +21,7 @@ export default React.createClass({
       <DocumentTitle title="Liqbo - Product Finder">
         <main className="layout__body">
           <header className="layout__header">
-            <h2>Products</h2>
+            <h3>Products</h3>
             <SearchInput query={ newQuery } status={ uiState } />
           </header>
           <section className="layout__content">

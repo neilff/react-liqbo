@@ -11,9 +11,11 @@ export function onLocatorQueryChange({target: {name, value}}) {
 }
 
 export function onLocatorQuerySubmit(query, location) {
+  query = query || '';
+
   dispatch(onLocatorQuerySubmit, query);
   getStores({
-    q: encodeURI(query.get('q')).replace(/%20/g,'+')
+    q: encodeURI(query).replace(/%20/g,'+')
   });
 }
 

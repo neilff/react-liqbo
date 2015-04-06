@@ -27,9 +27,10 @@
 ### Products:
 - Trim product model
 - Add pagination
-- Add products details page
 - Product query needs seperate event from store query
   - initially appears as thought products are loading
+- Add initial query
+
 
 ### Favourites:
 - Add favourites section

@@ -1,6 +1,6 @@
 import * as actions from './actions';
 import Immutable from 'immutable';
-import {productQueryCursor, productCursor} from '../state';
+import {productQueryCursor, productCursor, productDetailCursor} from '../state';
 import {register} from '../dispatcher';
 import {ProductItem} from '../records';
 
@@ -34,6 +34,14 @@ export const dispatchToken = register(({action, data}) => {
         });
       });
       break;
+
+    case actions.onProductDetailQuerySuccess:
+      console.log('onProductDetailQuerySuccess :: ', data);
+
+      var productItem = new ProductItem(data).toMap();
+
+      productDetailCursor(product => product.merge(productItem));
+      break;
   };
 })
 
@@ -43,4 +51,8 @@ export function getNewQuery() {
 
 export function getProductQuery() {
   return productCursor();
+}
+
+export function getProductDetail() {
+  return productDetailCursor();
 }

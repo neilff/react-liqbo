@@ -1,0 +1,30 @@
+.btn {
+  border-radius: 0;
+  border: 0;
+
+  &:active {
+    box-shadow: $inner-box-shadow;
+  }
+
+  &--blue {
+    background: $blue;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background: $blue;
+      color: white;
+    }
+  }
+
+  &--red {
+    background: $red;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background: $red;
+      color: white;
+    }
+  }
+}

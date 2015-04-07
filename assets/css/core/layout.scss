@@ -29,6 +29,8 @@
   &__body {
     flex: 1;
     margin-left: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     &--padded {
       padding: 16px;

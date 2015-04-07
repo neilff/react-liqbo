@@ -2,7 +2,7 @@ import * as actions from './actions';
 import Immutable from 'immutable';
 import {favouriteStoresCursor, favouriteProductsCursor} from '../state';
 import {register} from '../dispatcher';
-import {LocatorItem} from '../records';
+import {LocatorItem, ProductItem} from '../records';
 
 export const dispatchToken = register(({action, data}) => {
 
@@ -13,13 +13,28 @@ export const dispatchToken = register(({action, data}) => {
     /**
      * When store favourites are updated
      */
-    case actions.onUpdatedStoreFavourites:
+    case actions.onUpdatedLocationFavourites:
       favouriteStoresCursor(favourites => {
         return favourites.withMutations(list => {
           list.clear();
 
           data.forEach(i => {
             list.push(new LocatorItem(i).toMap());
+          });
+        });
+      });
+      break;
+
+    /**
+     * When product favourites are updated
+     */
+    case actions.onUpdatedProductFavourites:
+      favouriteProductsCursor(favourites => {
+        return favourites.withMutations(list => {
+          list.clear();
+
+          data.forEach(i => {
+            list.push(new ProductItem(i).toMap());
           });
         });
       });

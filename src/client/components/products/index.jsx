@@ -14,6 +14,7 @@ export default React.createClass({
   render() {
     const newQuery = productCursors.getNewQuery();
     const products = productCursors.getProductQuery();
+    const productFavourites = favouriteCursors.getProductFavourites();
 
     const uiState = getUIState();
 
@@ -25,7 +26,7 @@ export default React.createClass({
             <SearchInput query={ newQuery } status={ uiState } />
           </header>
           <section className="layout__content">
-            <ProductGrid products={ products } />
+            <ProductGrid products={ products } favourites={ productFavourites } />
           </section>
         </main>
       </DocumentTitle>

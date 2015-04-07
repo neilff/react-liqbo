@@ -11,14 +11,22 @@ export default React.createClass({
   mixins: [addons.PureRenderMixin],
 
   propTypes: {
-    product: React.PropTypes.instanceOf(Immutable.Map)
+    product: React.PropTypes.instanceOf(Immutable.Map),
+    favourite: React.PropTypes.bool
   },
 
   render() {
     const product = this.props.product;
+    const favourite = this.props.favourite;
     const productImg = product.get('image_thumb_url');
     const productSale = product.get('has_limited_time_offer');
     const productClearance = product.get('has_clearance_sale');
+
+    var isFavourite = null;
+
+    if (favourite) {
+      isFavourite = <i className="icon ion-android-star"></i>
+    }
 
     return (
       <Link to="product" params={ {productId: product.get('id')} } className="product-card">
@@ -28,7 +36,7 @@ export default React.createClass({
           </div>
           <div className="media-object__body">
             <div className="product-card__title">
-              <strong>{ product.get('name') }</strong>
+              <strong>{ isFavourite } { product.get('name') }</strong>
             </div>
             <div className="product-card__description">
               <div>{ product.get('package') }</div>

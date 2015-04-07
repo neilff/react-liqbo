@@ -18,7 +18,15 @@ export default React.createClass({
     const favourites = this.props.favourites;
 
     var productList = products.map((product, i) => {
-      return <ProductCard key={ product.get('id') } product={ product } />
+      var id = product.get('id');
+
+      var checkIfFavourite = favourites.find(i => {
+        return i.get('id') === id;
+      });
+
+      var isFavourite = typeof checkIfFavourite !== 'undefined';
+
+      return <ProductCard key={ id } product={ product } favourite={ isFavourite } />
     }).toArray();
 
     return (

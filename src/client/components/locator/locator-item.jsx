@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 import {addons} from 'react/addons';
 import HoursList from './hours-list';
 import {onMapFocus} from '../../locator/actions';
-import {onAddStoreFavourite, onRemoveStoreFavourite} from '../../favourites/actions';
+import {onAddLocationFavourite, onRemoveLocationFavourite} from '../../favourites/actions';
 
 export default React.createClass({
   mixins: [addons.PureRenderMixin],
@@ -28,12 +28,12 @@ export default React.createClass({
 
   addFavourite(store, e) {
     e.preventDefault();
-    onAddStoreFavourite(store.toJS());
+    onAddLocationFavourite(store.toJS());
   },
 
   removeFavourite(store, e) {
     e.preventDefault();
-    onRemoveStoreFavourite(store.get('id'));
+    onRemoveLocationFavourite(store.get('id'));
   },
 
   toggleDetails() {

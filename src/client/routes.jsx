@@ -1,16 +1,16 @@
-import App from './components/app';
-import Home from './components/home';
-import NotFound from './components/notfound';
 import React from 'react';
-import Locator from './components/locator';
-import Products from './components/products';
-import ProductDetail from './components/products/detail';
-import Favourites from './components/favourites';
-import About from './components/about';
+import Main from './sections/main';
+import Home from './sections/home';
+import NotFound from './sections/404';
+import Locator from './sections/locator';
+import Products from './sections/products';
+import ProductDetail from './sections/products/detail';
+import Favourites from './sections/favourites';
+import About from './sections/about';
 import {DefaultRoute, NotFoundRoute, Route} from 'react-router';
 
 export default (
-  <Route handler={ App } path="/">
+  <Route handler={ Main } path="/">
     <DefaultRoute handler={ Home } name="home" />
     <NotFoundRoute handler={ NotFound } name="not-found" />
     <Route handler={ Locator } name="locator" path="/locator" />

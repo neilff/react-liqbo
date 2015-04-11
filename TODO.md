@@ -9,6 +9,9 @@
 - Code cleanup
 - CSS cleanup
 - Remove console.logs
+- Split SCSS / markup into smaller components
+- Add loading images
+- Reorganize repo
 
 ### Sidebar:
 - Add favourites link

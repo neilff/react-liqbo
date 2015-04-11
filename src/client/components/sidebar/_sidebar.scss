@@ -1,0 +1,56 @@
+@import '../../../styles/core/variables';
+
+.sidebar {
+  background-color: $black / 1.15;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 200;
+    text-transform: uppercase;
+  }
+
+  &__logo {
+    color: white;
+    padding: 8px;
+    font-family: 'Lobster';
+    text-transform: none !important;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 100;
+      text-align: center;
+      width: 100%;
+      padding: 10px 0;
+      box-sizing: border-box;
+      margin: 0;
+    }
+  }
+
+  &__links {
+    &--item {
+      width: 100px;
+      height: 100px;
+      display: block;
+      padding: 24px 16px;
+      box-sizing: border-box;
+      text-align: center;
+      transition: background-color 200ms;
+
+      &:hover {
+        background-color: $blue;
+        color: white;
+      }
+
+      .icon {
+        font-size: 32px;
+        display: block;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 5px;
+        line-height: 1;
+      }
+    }
+  }
+}

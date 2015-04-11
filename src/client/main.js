@@ -1,8 +1,8 @@
 import React from 'react';
 import Router from 'react-router';
 import routes from './routes';
-import {i18nCursor} from './state';
-import {loadFavouriteStores, loadFavouriteProducts} from './api/favourites-api';
+import {i18nCursor} from './core/state';
+import {loadFavouriteStores, loadFavouriteProducts} from './core/api/favourites-api';
 
 const app = document.getElementById('root');
 

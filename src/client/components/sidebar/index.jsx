@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-require('../../../../assets/css/components/sidebar.scss');
+require('./_sidebar.scss');
 
 export default React.createClass({
 

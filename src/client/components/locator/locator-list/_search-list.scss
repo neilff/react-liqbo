@@ -8,45 +8,6 @@
     color: black;
   }
 
-  &__input {
-    color: black;
-    flex: 0.75;
-    display: flex;
-    text-align: right;
-    margin: 0;
-    border: 1px solid $black;
-
-    input {
-      margin: 0;
-      border: 0;
-      padding: 0 16px;
-      flex: 3;
-      border-radius: 0;
-
-      &:focus,
-      &:active {
-        outline: none;
-        border: 0;
-      }
-    }
-
-    button {
-      margin: 0;
-      border: 0;
-      padding: 0 16px;
-      flex: 1;
-      border-left: 1px solid $black;
-      background-color: $blue;
-      border-radius: 0;
-      padding: 0;
-      color: white;
-
-      &:active {
-        box-shadow: $inner-box-shadow;
-      }
-    }
-  }
-
   &__container {
     position: absolute;
     top: 0;
@@ -66,7 +27,6 @@
     // border when collapsed
     &--item {
       margin: 0;
-      font-size: 18px;
       background-color: white;
       transition: all 100ms;
 

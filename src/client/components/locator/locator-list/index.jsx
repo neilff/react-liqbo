@@ -24,9 +24,17 @@ export default React.createClass({
         return i.get('id') === id;
       });
 
+      var idx = (i + 1);
+
       var isFavourite = typeof checkIfFavourite !== 'undefined';
 
-      return <LocatorItem key={ id } store={ store } favourite={ isFavourite } />
+      return (
+        <LocatorItem
+          idx={ idx }
+          key={ id }
+          store={ store }
+          favourite={ isFavourite } />
+      );
     }).toArray()
 
     return (

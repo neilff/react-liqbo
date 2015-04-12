@@ -19,11 +19,17 @@ export const dispatchToken = register(({action, data}) => {
       break;
 
     /**
+     * When a query option is modified
+     */
+    case actions.onProductsParamToggle:
+      productQueryCursor(query => query.setIn(data.keyPath, data.value));
+      break;
+
+    /**
      * When the query response comes in, cast the response as an immutable
      * map and register the items as new records.
      */
     case actions.onProductsQuerySuccess:
-      console.log('onProductsQuerySuccess :: ', data);
       productCursor(products => {
         return products.withMutations(list => {
           list.clear();
@@ -36,8 +42,6 @@ export const dispatchToken = register(({action, data}) => {
       break;
 
     case actions.onProductDetailQuerySuccess:
-      console.log('onProductDetailQuerySuccess :: ', data);
-
       var productItem = new ProductItem(data).toMap();
 
       productDetailCursor(product => product.merge(productItem));

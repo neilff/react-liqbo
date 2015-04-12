@@ -33,16 +33,12 @@ export default React.createClass({
 
     const productId = product.get('id');
 
-    console.log('favourites :: ', favourites);
-
     // Scan list of favourites and see if the current product exists in it
     var checkIfFavourite = R.find(favourite => {
       return favourite.id === productId;
     })(favourites.toJS());
 
     var isFavourite = typeof checkIfFavourite !== 'undefined';
-
-    console.log('isFavourite :: ', isFavourite);
 
     const productImg = product.get('image_url');
     const productSale = product.get('has_limited_time_offer');
@@ -52,8 +48,8 @@ export default React.createClass({
     var removeFavourite = R.partial(this.removeFavourite, product);
 
     return (
-      <div className="product-detail__wrapper">
-        <div className="product-detail__image">
+      <div className="product-description">
+        <div className="product-description__image">
           <img src={ productImg ? productImg : notAvailableImg  } />
           {
             !isFavourite ?
@@ -65,7 +61,7 @@ export default React.createClass({
               </button>
           }
         </div>
-        <div className="product-detail__description">
+        <div className="product-description__body">
           <strong>{ product.get('package') }</strong>
           <div>{ product.get('primary_category') }</div>
           <p>{ product.get('varietal') }</p>
@@ -82,7 +78,7 @@ export default React.createClass({
           <div>{ product.get('producer_name') }</div>
           <p>{ product.get('origin') }</p>
 
-          <div className="product-detail__price"><strong>${ product.get('price') }</strong></div>
+          <div className="product-description__price"><strong>${ product.get('price') }</strong></div>
           <div>
             { productSale ? <span className="bubble blue">On Sale</span> : '' }
             { productClearance ? <span className="bubble red">On Clearance</span> : ''  }

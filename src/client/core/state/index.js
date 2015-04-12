@@ -9,9 +9,34 @@ const initialState = {
     locales: initialLocale,
     messages: messages[initialLocale]
   },
-  locatorQuery: { q: '' },
+  locatorQuery: {
+    q: '',
+    where: {
+      has_wheelchair_accessability: false,
+      has_bilingual_services: false,
+      has_product_consultant: false,
+      has_tasting_bar: false,
+      has_beer_cold_room: false,
+      has_special_occasion_permits: false,
+      has_vintages_corner: false,
+      has_parking: false,
+      has_transit_access: false
+    }
+  },
   locatorItems: [],
-  productQuery: { q: '' },
+  productQuery: {
+    q: '',
+    where: {
+      is_discontinued: false,
+      has_value_added_promotion: false,
+      has_limited_time_offer: false,
+      has_bonus_reward_miles: false,
+      is_seasonal: false,
+      is_vqa: false,
+      is_ocb: false,
+      is_kosher: false
+    }
+  },
   productItems: [],
   productDetails: {},
   mapFocus: [{

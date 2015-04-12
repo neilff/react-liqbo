@@ -2,6 +2,7 @@
 
 .sidebar {
   background-color: $black / 1.15;
+  padding-bottom: 100px;
 
   a {
     color: white;
@@ -40,6 +41,11 @@
 
       &:hover {
         background-color: $blue;
+        color: white;
+      }
+
+      &.active {
+        background-color: $mid-blue;
         color: white;
       }
 

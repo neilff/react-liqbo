@@ -1,24 +1,45 @@
+import R from 'ramda';
 import setToString from '../utils/settostring';
 import {dispatch} from '../dispatcher';
 import {getProducts, getProduct} from '../api/products-api';
+import {productQueryCursor} from '../state';
+
+function _getQueryParams() {
+  return R.keys(productQueryCursor()
+          .get('where')
+          .filter(val => val === true)
+          .toJS()).join(',');
+}
 
 export function onProductsQueryChange({target: {name, value}}) {
+  var where = _getQueryParams();
+
   dispatch(onProductsQueryChange, {name, value});
   getProducts({
-    q: encodeURI(value).replace(/%20/g,'+')
+    q: encodeURI(value).replace(/%20/g,'+'),
+    where: where
   });
 }
 
-/**
- * Products Query Actions
- */
 export function onProductsQuerySubmit(query) {
   query = query || '';
 
+  var where = _getQueryParams();
+
   dispatch(onProductsQuerySubmit, query);
   getProducts({
-    q: encodeURI(query).replace(/%20/g,'+')
+    q: encodeURI(query).replace(/%20/g,'+'),
+    where: where
   });
+}
+
+export function onProductsParamToggle({target: {value, checked}}) {
+  var obj = {
+    keyPath: ['where', value],
+    value: checked
+  };
+
+  dispatch(onProductsParamToggle, obj);
 }
 
 export function onProductsQuerySuccess(result) {
@@ -50,6 +71,7 @@ export function onProductDetailQueryFail(result) {
 setToString('products', {
   onProductsQueryChange,
   onProductsQuerySubmit,
+  onProductsParamToggle,
   onProductsQuerySuccess,
   onProductsQueryFail,
   onProductDetailRequest,

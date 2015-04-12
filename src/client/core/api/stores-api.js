@@ -113,8 +113,13 @@ function _extractCoordinates(stores) {
  * https://lcboapi.com/docs/v1/stores#many
  *
  */
-function _getStores(params) {
-  get('/stores', params)
+function _getStores(query) {
+  var params = {
+    where_not: 'is_dead',
+    per_page: 25
+  };
+
+  get('/stores', R.merge(params, query))
     .then(_buildStoreVM)
     .then(_extractCoordinates)
     .then(null, onLocatorQueryFail);

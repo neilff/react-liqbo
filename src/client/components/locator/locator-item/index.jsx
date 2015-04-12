@@ -12,7 +12,8 @@ export default React.createClass({
 
   propTypes: {
     store: React.PropTypes.instanceOf(Immutable.Map),
-    favourite: React.PropTypes.bool
+    favourite: React.PropTypes.bool,
+    idx: React.PropTypes.number
   },
 
   getInitialState() {
@@ -47,6 +48,7 @@ export default React.createClass({
   render() {
     const store = this.props.store;
     const favourite = this.props.favourite;
+    const idx = this.props.idx;
     const open = this.state.isDetailsOpen;
     const hours = Immutable.OrderedMap(store.get('operatingHours'));
 
@@ -88,7 +90,7 @@ export default React.createClass({
       <li className={ expandedItem }>
         <div className="media-object clickable" onClick={ this.toggleDetails }>
           <div className="media-object__body">
-            <strong className="media-object__title">{ isFavourite } { store.get('name') }</strong>
+            <strong className="media-object__title">{ isFavourite } {idx}. { store.get('name') }</strong>
             <div>{ store.get('address') }</div>
             <div>{ store.get('city') }</div>
             <strong>{ store.get('isOpen') }</strong>

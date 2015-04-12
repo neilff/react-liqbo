@@ -2,6 +2,8 @@
   .layout__content--left {
     flex: 4;
     display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .layout__content--right {

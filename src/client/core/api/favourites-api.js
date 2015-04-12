@@ -19,7 +19,6 @@ var favouriteProducts = db.store('favouriteProducts');
 export function loadFavouriteStores() {
   favouriteStores.all()
     .then(result => {
-      console.log('loadFavouriteStores :: ', result);
       actions.onUpdatedLocationFavourites(result);
     })
     .then(null, err => {
@@ -53,7 +52,6 @@ export function removeFavouriteStore(id) {
 export function loadFavouriteProducts() {
   favouriteProducts.all()
     .then(result => {
-      console.log('loadFavouriteProducts :: ', result);
       actions.onUpdatedProductFavourites(result);
     })
     .then(null, err => {
@@ -72,7 +70,7 @@ export function addFavouriteProduct(product) {
 }
 
 export function removeFavouriteProduct(id) {
-  favouriteStores.del(id)
+  favouriteProducts.del(id)
     .then(result => {
       loadFavouriteProducts();
     })

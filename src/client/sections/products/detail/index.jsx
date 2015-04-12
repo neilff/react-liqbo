@@ -43,8 +43,8 @@ export default React.createClass({
       <DocumentTitle title="Liqbo - Product Detail">
         <main className="layout__body product-detail">
           <header className="layout__header">
+            <Link to="products" className="layout__header--breadcrumb"><i className="icon ion-android-arrow-back"></i> Back to Products</Link>
             <h3>{ product.get('name') }</h3>
-            <Link to="products">Return to Products</Link>
           </header>
           <section className="layout__content">
             <div className="layout__content--left">

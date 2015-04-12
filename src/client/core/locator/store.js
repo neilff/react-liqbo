@@ -15,7 +15,16 @@ export const dispatchToken = register(({action, data}) => {
      */
     case actions.onLocatorQueryChange:
       const {name, value} = data;
+      console.log(data);
+
       locatorQueryCursor(query => query.set(name, value));
+      break;
+
+    /**
+     * When a query option is modified
+     */
+    case actions.onLocatorParamToggle:
+      locatorQueryCursor(query => query.setIn(data.keyPath, data.value));
       break;
 
     /**
@@ -56,6 +65,12 @@ export const dispatchToken = register(({action, data}) => {
 
 export function getNewQuery() {
   return locatorQueryCursor();
+}
+
+export function getActiveQueryParams() {
+  return locatorQueryCursor()
+          .get('where')
+          .filter(val => val === true);
 }
 
 export function getLocatorQuery() {

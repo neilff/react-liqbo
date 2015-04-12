@@ -27,8 +27,13 @@ var buildProductVM = R.pipeP(
  * https://lcboapi.com/docs/v1/products#many
  *
  */
-function _getProducts(params) {
-  get('/products', params)
+function _getProducts(query) {
+  var params = {
+    where_not: 'is_dead',
+    per_page: 100
+  };
+
+  get('/products', R.merge(params, query))
     .then(buildProductVM)
     .then(actions.onProductsQuerySuccess)
     .then(null, actions.onProductsQueryFail);
@@ -41,8 +46,8 @@ function _getProducts(params) {
  * https://lcboapi.com/docs/v1/products
  *
  */
-function _getProduct(id, params) {
-  get('/products/' + id, params)
+function _getProduct(id, query) {
+  get('/products/' + id, query)
     .then(_convertProductPrice)
     .then(actions.onProductDetailQuerySuccess)
     .then(null, actions.onProductQueryFail);

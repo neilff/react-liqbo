@@ -1,21 +1,45 @@
+import R from 'ramda';
 import setToString from '../utils/settostring';
 import {dispatch} from '../dispatcher';
 import {getStores} from '../api/stores-api';
+import {locatorQueryCursor} from '../state';
 import {requestGeoLocation} from '../utils/geolocation';
 
+function _getQueryParams() {
+  return R.keys(locatorQueryCursor()
+          .get('where')
+          .filter(val => val === true)
+          .toJS()).join(',');
+}
+
 export function onLocatorQueryChange({target: {name, value}}) {
+  var where = _getQueryParams();
+
   dispatch(onLocatorQueryChange, {name, value});
   getStores({
-    q: encodeURI(value).replace(/%20/g,'+')
+    q: encodeURI(value).replace(/%20/g,'+'),
+    where: where
   });
+}
+
+export function onLocatorParamToggle({target: {value, checked}}) {
+  var obj = {
+    keyPath: ['where', value],
+    value: checked
+  };
+
+  dispatch(onLocatorParamToggle, obj);
 }
 
 export function onLocatorQuerySubmit(query, location) {
   query = query || '';
 
+  var where = _getQueryParams();
+
   dispatch(onLocatorQuerySubmit, query);
   getStores({
-    q: encodeURI(query).replace(/%20/g,'+')
+    q: encodeURI(query).replace(/%20/g,'+'),
+    where: where
   });
 }
 
@@ -38,10 +62,13 @@ export function onGeoLocateRequest() {
 }
 
 export function onGeoLocationSuccess(location) {
+  var where = _getQueryParams();
+
   dispatch(onGeoLocationSuccess, location);
   getStores({
     lat: location.coords.latitude,
-    lon: location.coords.longitude
+    lon: location.coords.longitude,
+    where: where
   });
 }
 
@@ -53,6 +80,7 @@ export function onGeoLocationFail(error) {
 setToString('locator', {
   onLocatorQueryChange,
   onLocatorQuerySubmit,
+  onLocatorParamToggle,
   onLocatorQuerySuccess,
   onLocatorQueryFail,
   onMapFocus,

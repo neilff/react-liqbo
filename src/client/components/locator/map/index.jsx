@@ -58,20 +58,23 @@ export default React.createClass({
     let stores = this.props.stores;
 
     stores.map((store, i) => {
+      var idx = (i + 1);
       var latLng = new google.maps.LatLng(store.get('latitude'), store.get('longitude'));
 
       var marker = new google.maps.Marker({
         position: latLng,
-        map: map
+        map: map,
+        icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=' +
+          idx + '|FFFFFF|323232'
       });
 
-      marker['infoWindow'] = new google.maps.InfoWindow({
+      marker.infoWindow = new google.maps.InfoWindow({
         content: '<strong>Store #' + store.get('id') + '</strong> ' +
                  '<div>' + store.get('name') + '</div>'
       });
 
       google.maps.event.addListener(marker, 'click', function() {
-        this['infoWindow'].open(map, this);
+        this.infoWindow.open(map, this);
       });
 
       markers.push(marker);

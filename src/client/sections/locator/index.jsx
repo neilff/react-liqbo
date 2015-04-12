@@ -32,7 +32,10 @@ export default React.createClass({
         <main className="layout__body">
           <header className="layout__header">
             <h3>Stores</h3>
-            <LocatorSearch query={ newQuery } location={ currentLocation } status={ uiState } />
+            <LocatorSearch
+              query={ newQuery }
+              location={ currentLocation }
+              status={ uiState } />
             <GeoLocate status={ uiState } />
           </header>
           <section className="layout__content">

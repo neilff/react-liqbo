@@ -1,23 +1,13 @@
-.product-detail {
-  .layout__content--left {
-    flex: 4;
-    display: flex;
-  }
-
-  .layout__content--right {
-    flex: 2;
-  }
+.product-description {
+  display: flex;
+  width: 100%;
 
   img {
     max-width: 100%;
     height: 325px;
   }
 
-  &__wrapper {
-    display: flex;
-  }
-
-  &__description {
+  &__body {
     flex: 1;
     padding: 40px 16px 16px;
   }
@@ -29,10 +19,6 @@
   &__image {
     flex: 1;
     text-align: center;
-  }
-
-  &__description {
-
   }
 
   .btn {

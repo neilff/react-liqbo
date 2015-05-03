@@ -1,5 +1,10 @@
 # React Liqbo
 
+##### Environment Variables
+```
+LCBO_API_KEY - The LCBO API Key you plan to utilize
+```
+
 ##### Install
 
 ```
@@ -10,7 +15,7 @@ npm install
 ##### Development
 
 ```
-gulp
+gulp serve
 ```
 
 ##### Build

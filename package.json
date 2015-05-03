@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/neilff/react-liqbo.git",
   "dependencies": {
+    "autoprefixer-loader": "^1.2.0",
     "axios": "^0.5.2",
     "babel-core": "^4.7.4",
     "babel-loader": "^4.1.0",
@@ -40,6 +41,7 @@
     "gulp-util": "^3.0.4",
     "gutil": "^1.6.4",
     "immutable": "^3.7.1",
+    "intl": "^0.1.4",
     "jsx-loader": "^0.13.1",
     "pouchdb": "^3.3.1",
     "prettyjson": "^1.1.0",

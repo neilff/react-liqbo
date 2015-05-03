@@ -1,12 +1,19 @@
+var prettyjson = require('prettyjson');
 var express = require('express');
 var request = require('superagent');
 var R = require('ramda');
 var cors = require('cors');
+var keys = require('./keys');
 
 var app = express();
 
-const LCBO_API_KEY = process.env.LCBO_API_KEY;
-const API_ROOT = 'http://www.lcboapi.com/';
+const LCBO_API_KEY = keys.LCBO_API_KEY;
+const API_ROOT = 'https://www.lcboapi.com/';
+
+console.log(prettyjson.render({
+  LCBO_API_KEY: LCBO_API_KEY,
+  API_ROOT: API_ROOT
+}));
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/build'));
@@ -17,13 +24,15 @@ var server = app.listen(app.get('port'), function() {
     this.close();
     console.error('Invalid LCBO_API_KEY, provide a working LCBO API Key as env variable.');
   } else {
-    console.log('Node app is running at localhost:' + app.get('port'));
+    console.log('Server is running at localhost:' + app.get('port'));
   }
 });
 
+/**
+ * Proxy LCBO API
+ */
 app.get('/api/*', function (req, res) {
   const endpoint = req.params[0];
-  console.log(LCBO_API_KEY);
 
  request
   .get(API_ROOT + endpoint)

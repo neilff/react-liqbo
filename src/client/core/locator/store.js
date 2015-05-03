@@ -1,6 +1,6 @@
 import * as actions from './actions';
 import Immutable from 'immutable';
-import {locatorQueryCursor, locatorCursor, mapFocusCursor, userLocationCursor} from '../state';
+import {locatorQueryCursor, locatorDetailCursor, locatorCursor, mapFocusCursor, userLocationCursor} from '../state';
 import {register} from '../dispatcher';
 import {LocatorItem, LocatorCoordinates, UserGeoLocation} from './records';
 
@@ -43,6 +43,13 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
+    case actions.onLocatorDetailQuerySuccess:
+      console.log('onLocatorDetailQuerySuccess', data);
+      var locationDetail = new LocatorItem(data).toMap();
+
+      locatorDetailCursor(location => location.merge(locationDetail));
+      break;
+
     case actions.onMapFocus:
       mapFocusCursor(focus => {
         return focus.withMutations(list => {
@@ -75,6 +82,10 @@ export function getActiveQueryParams() {
 
 export function getLocatorQuery() {
   return locatorCursor();
+}
+
+export function getLocatorDetail() {
+  return locatorDetailCursor();
 }
 
 export function getMapFocus() {

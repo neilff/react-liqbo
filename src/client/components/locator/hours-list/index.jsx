@@ -24,7 +24,7 @@ export default React.createClass({
                   <strong>{ day.toUpperCase() }</strong>
                 </div>
                 <div className="one">
-                  <span>{ hours.get(day).displayFull }</span>
+                  <span>{ hours.get(day) ? hours.get(day).displayFull : null }</span>
                 </div>
               </div>
             </li>

@@ -3,6 +3,7 @@ import R from 'ramda';
 import classNames from 'classnames';
 import Immutable from 'immutable';
 import {addons} from 'react/addons';
+import {Link} from 'react-router';
 import HoursList from '../hours-list';
 import {onMapFocus} from '../../../core/locator/actions';
 import {onAddLocationFavourite, onRemoveLocationFavourite} from '../../../core/favourites/actions';
@@ -116,6 +117,11 @@ export default React.createClass({
                 <strong></strong>
               </div>
               <ul>
+                <li className="text-right">
+                  <Link to="locatorDetails" params={ {locatorId: store.get('id')} }>
+                    View Details
+                  </Link>
+                </li>
                 <li className="text-right">
                   <a href onClick={ focusStore }>Find on Map</a>
                 </li>

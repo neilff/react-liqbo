@@ -2,7 +2,8 @@ import {dispatch} from '../dispatcher';
 import R from 'ramda';
 import debounce from 'debounce';
 import {get} from '../server';
-import {onLocatorQuerySuccess, onMapFocus, onLocatorQueryFail} from '../locator/actions.js';
+import {onLocatorQuerySuccess, onLocatorDetailQuerySuccess, onMapFocus, onLocatorQueryFail} from '../locator/actions.js';
+import {onProductAvailableQuerySuccess} from '../products/actions.js';
 import {msmTo24time, msmTo12time, daysOfWeek, prettify12Hr} from '../utils/conversion';
 
 /**
@@ -101,12 +102,21 @@ var _buildStoreVM = R.pipeP(
   R.map(_convertDistance)
 );
 
+var _buildDetailVM = R.pipeP(
+  _convertStoreHours,
+  _compressAddress,
+  _calculateIsOpen,
+  _convertDistance
+);
+
 function _extractCoordinates(stores) {
   onLocatorQuerySuccess(stores);
   onMapFocus(stores);
 }
 
 /**
+ * Retrieves stores based on the provided query params
+ *
  * GET lcboapi.com/stores
  *
  * Response:
@@ -125,4 +135,51 @@ function _getStores(query) {
     .then(null, onLocatorQueryFail);
 }
 
+/**
+ * Retrieves a stores details
+ *
+ * GET lcboapi.com/stores
+ *
+ * Response:
+ * https://lcboapi.com/docs/v1/stores#many
+ *
+ */
+function _getLocation(id) {
+  get('/stores/' + id)
+    .then(_buildDetailVM)
+    .then(onLocatorDetailQuerySuccess)
+    .then(null, onLocatorQueryFail);
+}
+
+/**
+ * Retrieves stores containing the provided product ID
+ *
+ * GET lcboapi.com/stores?product_id={id}
+ *
+ * Response:
+ * https://lcboapi.com/docs/v1/stores#many
+ *
+ */
+function _getStoresWithProduct(id) {
+  var params = {
+    product_id: id
+  };
+
+  get('/stores', params)
+    .then(_buildStoreVM)
+    .then(function(stores) {
+      return {
+        id: id,
+        stores: stores
+      };
+    })
+    .then(onProductAvailableQuerySuccess)
+    .then(null, onLocatorQueryFail);
+}
+
 export var getStores = debounce(_getStores, 500);
+export var getLocation = debounce(_getLocation, 500);
+
+export function getStoresWithProduct(id) {
+  return debounce(_getStoresWithProduct(id), 500);
+}

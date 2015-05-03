@@ -1,7 +1,7 @@
 import R from 'ramda';
 import setToString from '../utils/settostring';
 import {dispatch} from '../dispatcher';
-import {getStores} from '../api/stores-api';
+import {getStores, getLocation} from '../api/stores-api';
 import {locatorQueryCursor} from '../state';
 import {requestGeoLocation} from '../utils/geolocation';
 
@@ -76,6 +76,22 @@ export function onGeoLocationFail(error) {
   dispatch(onGeoLocationFail, error);
 }
 
+/**
+ * Locator Detail Query Actions
+ */
+export function onLocatorDetailRequest(id) {
+  dispatch(onLocatorDetailRequest);
+  getLocation(id);
+}
+
+export function onLocatorDetailQuerySuccess(result) {
+  dispatch(onLocatorDetailQuerySuccess, result);
+}
+
+export function onLocatorDetailQueryFail(result) {
+  dispatch(onLocatorDetailQueryFail, result)
+}
+
 // Override actions toString for logging.
 setToString('locator', {
   onLocatorQueryChange,
@@ -86,5 +102,8 @@ setToString('locator', {
   onMapFocus,
   onGeoLocateRequest,
   onGeoLocationSuccess,
-  onGeoLocationFail
+  onGeoLocationFail,
+  onLocatorDetailRequest,
+  onLocatorDetailQuerySuccess,
+  onLocatorDetailQueryFail
 });

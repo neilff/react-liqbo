@@ -17,6 +17,10 @@ var notAvailableImg = require('./not-available.svg');
 export default React.createClass({
   mixins: [addons.PureRenderMixin],
 
+  propTypes: {
+    favourite: React.PropTypes.bool
+  },
+
   addFavourite(product, e) {
     e.preventDefault();
     onAddProductFavourite(product.toJS());
@@ -29,17 +33,7 @@ export default React.createClass({
 
   render() {
     const product = this.props.product;
-    const favourites = this.props.favourites;
-
-    const productId = product.get('id');
-
-    // Scan list of favourites and see if the current product exists in it
-    var checkIfFavourite = R.find(favourite => {
-      return favourite.id === productId;
-    })(favourites.toJS());
-
-    var isFavourite = typeof checkIfFavourite !== 'undefined';
-
+    const isFavourite = this.props.favourite;
     const productImg = product.get('image_url');
     const productSale = product.get('has_limited_time_offer');
     const productClearance = product.get('has_clearance_sale');

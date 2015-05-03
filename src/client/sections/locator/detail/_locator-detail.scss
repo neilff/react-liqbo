@@ -1,0 +1,23 @@
+.locator-detail {
+  .layout__content--right {
+    flex: 4;
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .layout__content--left {
+    flex: 3;
+    border: 0;
+  }
+
+  img {
+    max-width: 100%;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  .flex-list {
+    width: 90%;
+  }
+}

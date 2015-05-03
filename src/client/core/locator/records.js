@@ -4,6 +4,8 @@ export const LocatorItem = Immutable.Record({
   id: '',
   name: '',
   address: '',
+  address_line_1: '',
+  address_line_2: '',
   postal_code: '',
   city: '',
   latitude: '',
@@ -11,7 +13,8 @@ export const LocatorItem = Immutable.Record({
   telephone: '',
   distance: '',
   operatingHours: {},
-  isOpen: ''
+  isOpen: '',
+  quantity: ''
 });
 
 export const LocatorCoordinates = Immutable.Record({

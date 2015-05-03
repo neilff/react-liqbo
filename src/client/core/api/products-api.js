@@ -2,6 +2,7 @@ import {dispatch} from '../dispatcher';
 import R from 'ramda';
 import debounce from 'debounce';
 import {get} from '../server';
+import * as productCursors from '../products/store';
 import * as actions from '../products/actions';
 
 /**
@@ -40,17 +41,30 @@ function _getProducts(query) {
 }
 
 /**
- * GET lcboapi.com/products/{ id }
+ * GET lcboapi.com/products/{ productId }
  *
  * Response:
  * https://lcboapi.com/docs/v1/products
  *
  */
-function _getProduct(id, query) {
-  get('/products/' + id, query)
-    .then(_convertProductPrice)
-    .then(actions.onProductDetailQuerySuccess)
-    .then(null, actions.onProductQueryFail);
+function _getProduct(productId, query) {
+
+  // Scan the product cursor for the provided ID, if it exists, use it
+  // Otherwise, request it from the API
+  const products = productCursors.getProductQuery();
+
+  var foundProduct = products.find(i => {
+    return i.get('id').toString() === productId;
+  });
+
+  if (foundProduct) {
+    actions.onProductDetailQuerySuccess(foundProduct);
+  } else {
+    get('/products/' + productId, query)
+      .then(_convertProductPrice)
+      .then(actions.onProductDetailQuerySuccess)
+      .then(null, actions.onProductQueryFail);
+  }
 }
 
 export var getProducts = debounce(_getProducts, 500);

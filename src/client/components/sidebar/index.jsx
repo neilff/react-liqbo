@@ -20,7 +20,7 @@ export default React.createClass({
               <span className="icon-label">Products</span>
             </div>
           </Link>
-          <Link to="locator" className="sidebar__links--item">
+          <Link to="home" className="sidebar__links--item">
             <div>
               <i className="icon ion-android-cart" />
             </div>

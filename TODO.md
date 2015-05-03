@@ -6,17 +6,17 @@
 - Add mobile support
 - Deploy to heroku
 - Code cleanup
-- CSS cleanup
+- CSS cleanup (use REMs)
 - Split SCSS / markup into smaller components
 - Add loading images
-- Merge search functionalities
+- Merge search components
 
 ### Stores:
-- Add store details page
+- Fix up layout for detail page
 
 ### Products:
-- Add find locally
-- Add advanced search options
+- Add loading for product detail, hook into 'onProductDetailRequest'
+- Add css for local search panel
 
 ### Favourites:
 - Add favourites section
@@ -37,3 +37,4 @@
 - User icon on map disappears on route change
 - Product query needs seperate event from store query
   - initially appears as thought products are loading
+- Debug what happens when user doesn't provide Geolocation, do we fall back?

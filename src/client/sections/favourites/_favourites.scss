@@ -1,0 +1,14 @@
+@import '../../../styles/core/variables';
+
+.favourites {
+  display: flex;
+
+  &__column {
+    flex: 1;
+    padding: 2rem;
+
+    &:first-child {
+      border-right: 1px solid $black;
+    }
+  }
+}

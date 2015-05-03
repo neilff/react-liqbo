@@ -1,0 +1,40 @@
+.locator-description {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  &__title {
+    font-size: 2rem;
+
+    strong {
+      font-size: 2.5rem;
+      display: block;
+    }
+  }
+
+  &__add-favourite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__row {
+    display: flex;
+    padding: 2rem;
+    flex-direction: row;
+  }
+
+  &__column {
+    flex: 1;
+    box-sizing: border-box;
+  }
+
+  .btn {
+    margin: 2rem 0;
+    display: block;
+  }
+}

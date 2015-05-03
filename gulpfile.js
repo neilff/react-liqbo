@@ -1,18 +1,18 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'));
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config.js');
 
-gulp.task('default', ['webpack-dev-server']);
+gulp.task('serve', 'Launch development enviroment', ['webpack-dev-server']);
 
-gulp.task('build-dev', ['webpack:build-dev'], function() {
+gulp.task('build-dev', 'Create development build', ['webpack:build-dev'], function() {
   gulp.watch(['src/**/*'], ['webpack:build-dev']);
 });
 
-gulp.task('build', ['webpack:build']);
+gulp.task('build', 'Create production build', ['webpack:build']);
 
-gulp.task('webpack:build', function(callback) {
+gulp.task('webpack:build', false, function(callback) {
   var config = Object.create(webpackConfig(false));
 
   gulp.src('./src/index.html')
@@ -34,7 +34,7 @@ gulp.task('webpack:build', function(callback) {
 var devConfig = Object.create(webpackConfig(true));
 var devCompiler = webpack(devConfig);
 
-gulp.task('webpack:build-dev', function(callback) {
+gulp.task('webpack:build-dev', false, function(callback) {
   devCompiler.run(function(err, stats) {
     if(err) {
       throw new gutil.PluginError('webpack:build-dev', err);
@@ -48,7 +48,7 @@ gulp.task('webpack:build-dev', function(callback) {
   });
 });
 
-gulp.task('webpack-dev-server', function(callback) {
+gulp.task('webpack-dev-server', false, function(callback) {
   var config = Object.create(webpackConfig(true));
 
   // Start a webpack-dev-server

@@ -3,11 +3,10 @@ var express = require('express');
 var request = require('superagent');
 var R = require('ramda');
 var cors = require('cors');
-var keys = require('./keys');
 
 var app = express();
 
-const LCBO_API_KEY = keys.LCBO_API_KEY;
+const LCBO_API_KEY = process.env.LCBO_API_KEY;
 const API_ROOT = 'https://www.lcboapi.com/';
 
 console.log(prettyjson.render({

@@ -4,7 +4,6 @@ var gutil = require('gulp-util');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config.js');
-var keys = require('./keys');
 
 gulp.task('serve', 'Launch development enviroment', ['nodemon', 'webpack-dev-server']);
 
@@ -13,8 +12,7 @@ gulp.task('nodemon', false, function () {
     script: 'server.js',
     ext: 'js html',
     env: {
-      'NODE_ENV': 'development',
-      'LCBO_API_KEY': keys.LCBO_API_KEY
+      'NODE_ENV': 'development'
     }
   });
 });

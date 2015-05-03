@@ -10,6 +10,7 @@
 - Split SCSS / markup into smaller components
 - Add loading images
 - Merge search components
+- Fix broken Safari / iOS experience
 
 ### Stores:
 - Fix up layout for detail page
